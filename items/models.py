@@ -3,11 +3,19 @@ from django.db import models
 # Create your models here.
 
 class Person(models.Model):
+
+    def __str__(self):
+        return self.name
+
     name = models.CharField(max_length=200)
     number_cellphone = models.CharField(max_length=20)
     relationship = models.CharField(max_length=30)
     cpf_person = models.CharField(max_length=30)
 class Item(models.Model):
+
+    def __str__(self):
+        return self.item_name
+    
     item_name = models.CharField(max_length=100)
     register_date = models.DateTimeField("Item Register Date")
     withdraw_date = models.DateTimeField("Item Withdraw Date", null=True, blank=True)
