@@ -1,5 +1,7 @@
-from django.db import models
+import datetime
 
+from django.db import models
+from django.utils import timezone
 # Create your models here.
 
 class Person(models.Model):
@@ -15,6 +17,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.item_name
+    
+    def was_registered_recently(self):
+        return self.register_date >= timezone.now() - datetime.timedelta(days=1)
     
     item_name = models.CharField(max_length=100)
     register_date = models.DateTimeField("Item Register Date")
