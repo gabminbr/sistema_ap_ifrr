@@ -5,3 +5,7 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("Hello, items index.")
+
+def detail_item(request, item_id):
+    return HttpResponse("Seeing the item n. %s." % item_id)
+
