@@ -20,10 +20,16 @@ class Item(models.Model):
     
     def was_registered_recently(self):
         return self.register_date >= timezone.now() - datetime.timedelta(days=1)
-    
+
+    STATUS_CHOICE = [
+        ('lost', 'LOST'),
+        ('found', 'FOUND'),
+        ('returned', 'RETURNED'),
+    ]
+
     item_name = models.CharField(max_length=100)
     register_date = models.DateTimeField("Item Register Date")
     withdraw_date = models.DateTimeField("Item Withdraw Date", null=True, blank=True)
-    was_it_removed = models.BooleanField("Item Removed")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='lost')
     found_item_person = models.ForeignKey(Person, on_delete=models.PROTECT, related_name="items_found")
     owner_item = models.ForeignKey(Person, on_delete=models.PROTECT, related_name="items_owned", null=True, blank=True)
